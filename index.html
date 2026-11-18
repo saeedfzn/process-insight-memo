@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invoice Exceptions Memo</title>
+<meta name="description" content="Work sample: a one-page steerco decision memo on supplier invoice exceptions at a fictional UK grocer, with the fact base, sensitivity, hypothesis log, agent-versus-person split and handover behind it.">
+<meta property="og:title" content="Invoice exceptions: a decision memo and fact base (work sample)">
+<meta property="og:description" content="A one-page steerco memo on supplier invoice exceptions at a fictional UK grocer, backed by a process map, value sizing with ranges, a hypothesis log and a handover list.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://saeedfzn.github.io/process-insight-memo/">
+<meta property="og:site_name" content="Faizaan Saeed: work samples">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://saeedfzn.github.io/process-insight-memo/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f3a5f'/%3E%3Cpath d='M9 9h14M9 16h14M9 23h8' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<script>
+  (function () {
+    try { var t = localStorage.getItem('pim-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  })();
+</script>
+<style>
+:root{
+  --bg:#f6f6f3; --surface:#ffffff; --surface-2:#eef0f2; --text:#16191d; --text-2:#3f454c; --muted:#555c64;
+  --line:#d5d9dd; --line-strong:#9aa2ab; --accent:#1f3a5f; --accent-ink:#1d4f8f; --accent-soft:#e6edf6;
+  --good:#1b6a37; --good-soft:#e5f3ea; --warn:#7f5200; --warn-soft:#fbf0dc; --bad:#9f2328; --bad-soft:#fbe7e8;
+  --focus:#1d4f8f; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111316; --surface:#1a1d21; --surface-2:#23272c; --text:#eceef0; --text-2:#c2c8ce; --muted:#a9b0b8;
+    --line:#343a41; --line-strong:#5b636c; --accent:#9cc0f0; --accent-ink:#9cc3ff; --accent-soft:#1d2a3b;
+    --good:#7fd69b; --good-soft:#17291e; --warn:#f0bd5e; --warn-soft:#2e2412; --bad:#ff9a9e; --bad-soft:#33191b;
+    --focus:#9cc3ff; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111316; --surface:#1a1d21; --surface-2:#23272c; --text:#eceef0; --text-2:#c2c8ce; --muted:#a9b0b8;
+  --line:#343a41; --line-strong:#5b636c; --accent:#9cc0f0; --accent-ink:#9cc3ff; --accent-soft:#1d2a3b;
+  --good:#7fd69b; --good-soft:#17291e; --warn:#f0bd5e; --warn-soft:#2e2412; --bad:#ff9a9e; --bad-soft:#33191b;
+  --focus:#9cc3ff; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+a{color:var(--accent-ink)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.skip{position:absolute;left:-9999px;top:8px;background:var(--surface);color:var(--text);padding:8px 12px;border:1px solid var(--line-strong);z-index:10}
+.skip:focus{left:16px}
+header.top{border-bottom:1px solid var(--line);background:var(--surface)}
+header.top .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+.brand{font-size:13px;color:var(--text-2);font-weight:600;letter-spacing:.02em}
+.brand span{color:var(--muted);font-weight:400}
+nav.toc{display:flex;flex-wrap:wrap;gap:6px}
+nav.toc a{font-size:13px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--text-2);text-decoration:none;background:var(--surface)}
+nav.toc a:hover{border-color:var(--line-strong)}
+button{font:inherit;color:inherit}
+.btn{font-size:13px;padding:5px 11px;border:1px solid var(--line-strong);border-radius:6px;background:var(--surface);color:var(--text);cursor:pointer}
+.btn:hover{background:var(--surface-2)}
+.btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent-ink)}
+main.wrap{padding-top:22px;padding-bottom:8px}
+section{margin:0 0 40px}
+h1{font-size:clamp(24px,4.4vw,34px);line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
+h2{font-size:21px;line-height:1.25;margin:0 0 6px}
+h3{font-size:15px;margin:18px 0 8px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);font-weight:700;margin:0}
+.sub{color:var(--text-2);margin:0 0 16px;max-width:760px}
+.small{font-size:13px;color:var(--muted)}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 6px;border-radius:4px;border:1px solid currentColor;white-space:nowrap}
+.t-meas{color:var(--good)} .t-samp{color:var(--accent-ink)} .t-assm{color:var(--warn)} .t-none{color:var(--muted)}
+
+/* memo */
+.memo{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--accent);border-radius:4px;padding:22px 24px}
+.memo-meta{font-size:13px;color:var(--text-2);margin:0 0 12px;max-width:900px}
+.decision{font-size:15px;margin:0 0 10px}
+.answer{font-size:clamp(17px,2.4vw,20px);line-height:1.3;font-weight:700;margin:0 0 6px;max-width:900px}
+.memo ol.moves{margin:0 0 12px;padding-left:22px;max-width:900px;font-size:15.5px}
+.memo ol.moves li{margin:0 0 6px}
+.scale{margin:16px 0 16px;max-width:900px;font-size:14px;color:var(--text-2);border-left:3px solid var(--line-strong);padding-left:10px}
+.hdr-btns{display:flex;gap:6px}
+.why{margin:0 0 16px;color:var(--text-2);max-width:900px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:0 0 16px;padding:0;list-style:none}
+.tile{border:1px solid var(--line);border-radius:4px;padding:12px 14px;background:var(--bg)}
+.tile .kind{font-size:12px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:.05em;margin:0 0 2px}
+.tile .num{font-size:30px;font-weight:700;line-height:1.1;letter-spacing:-.01em;font-variant-numeric:tabular-nums;margin:2px 0 4px}
+.tile .lbl{font-size:14px;margin:0 0 6px}
+.tile .base{font-size:13px;color:var(--text-2);margin:0}
+.memo-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.memo-cols .colh{margin:0 0 8px;font-size:13px;line-height:1.3;text-transform:uppercase;letter-spacing:.05em;color:var(--text-2)}
+.memo ol,.memo ul{margin:0;padding-left:20px}
+.memo li{margin:0 0 6px}
+.memo .tiles{padding-left:0}
+.memo .tiles li{margin:0}
+.fictional{font-size:12px;color:var(--muted);margin:14px 0 0;border-top:1px solid var(--line);padding-top:10px}
+.roles{font-size:13px;color:var(--muted);margin:10px 0 0}
+
+/* generic panels / tables */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:16px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.scroll:focus-visible{outline-offset:0}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+caption{text-align:left;font-weight:600;font-size:14px;padding:0 0 8px;color:var(--text)}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--line)}
+thead th{font-size:12px;color:var(--text-2);font-weight:700;border-bottom:2px solid var(--line-strong);white-space:nowrap}
+tbody th{font-weight:600}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rowsub{display:block;white-space:normal;min-width:11em;font-weight:400;color:var(--muted);font-size:12.5px}
+
+/* process map */
+.map-ctrls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--text-2);margin-left:auto}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.lane-auto{background:var(--good)} .lane-man{background:var(--accent-ink)} .lane-loop{background:var(--warn)}
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.flow li{position:relative;min-width:0}
+.step{width:100%;height:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent-ink);border-radius:4px;padding:9px 10px;cursor:pointer;display:flex;flex-direction:column;gap:3px}
+.step:hover{border-color:var(--line-strong)}
+.step[aria-expanded="true"]{background:var(--accent-soft);border-color:var(--accent-ink)}
+.step.auto{border-left-color:var(--good)}
+.step .sn{font-size:11.5px;font-weight:700;color:var(--text-2)}
+.step .st{font-size:13.5px;font-weight:650;line-height:1.25}
+.step .ss{font-size:12px;color:var(--muted)}
+.step .flag{font-size:11.5px;font-weight:700;color:var(--bad)}
+.loops{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.loops[hidden]{display:none}
+.loop{width:100%;text-align:left;background:var(--warn-soft);border:1px dashed var(--warn);border-radius:4px;padding:8px 10px;cursor:pointer;display:flex;flex-direction:column;gap:2px}
+.loop[aria-expanded="true"]{border-style:solid;box-shadow:inset 0 0 0 1px var(--warn)}
+.loop .st{font-size:13.5px;font-weight:650}
+.loop .ss{font-size:12px;color:var(--text-2)}
+.detail{margin-top:12px;border:1px solid var(--line);border-radius:4px;padding:12px 14px;background:var(--bg);min-height:96px}
+.detail h3{margin:0 0 6px}
+.detail dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:0;font-size:13.5px}
+.detail dt{color:var(--text-2);font-weight:600}
+.detail dd{margin:0}
+
+/* sizing */
+.sizing{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
+.sizing>*{min-width:0}
+#ctrls{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0 22px}
+.ctrl{margin:0 0 14px}
+.ctrl label{display:flex;justify-content:space-between;gap:8px;font-size:13.5px;font-weight:600}
+.ctrl output{font-variant-numeric:tabular-nums;font-weight:700}
+.ctrl input[type=range]{width:100%;margin:6px 0 2px;accent-color:var(--accent-ink)}
+.ctrl .hint{font-size:12px;color:var(--muted);margin:0}
+.flagbar{font-size:13px;padding:8px 10px;border-radius:4px;margin:0 0 12px;border:1px solid var(--line)}
+.flagbar.base{background:var(--good-soft);color:var(--good);border-color:var(--good)}
+.flagbar.diff{background:var(--warn-soft);color:var(--warn);border-color:var(--warn)}
+.outs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:14px 0 0}
+.out{border:1px solid var(--line);border-radius:4px;padding:10px 12px;background:var(--bg)}
+.out .k{font-size:12.5px;color:var(--text-2);margin:0}
+.out .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;margin:2px 0 0}
+.out .d{font-size:12px;color:var(--muted);margin:2px 0 0}
+.checks{list-style:none;margin:8px 0 0;padding:0;font-size:13px}
+.checks li{padding:3px 0}
+.ok{color:var(--good);font-weight:700} .fail{color:var(--bad);font-weight:700}
+
+/* hypothesis log */
+.hyp{display:grid;gap:12px}
+.h-card{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px 16px}
+.h-head{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:baseline;margin:0 0 6px}
+.h-head h3{margin:0;font-size:15px}
+.st-rej{color:var(--bad)} .st-rev{color:var(--warn)} .st-cur{color:var(--good)}
+.h-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;font-size:13.5px}
+.h-grid p{margin:0}
+.h-grid b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--text-2)}
+.conf{display:inline-flex;gap:3px;vertical-align:middle;margin-left:4px}
+.conf i{width:9px;height:9px;border-radius:2px;border:1px solid var(--text-2);display:inline-block}
+.conf i.on{background:var(--text-2)}
+
+/* handover */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pilot{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.pilot .panel h3{margin-top:0}
+.pilot p{margin:0 0 6px;font-size:13.5px}
+
+footer{border-top:1px solid var(--line);background:var(--surface);margin-top:24px}
+footer .wrap{padding-top:18px;padding-bottom:24px;font-size:13.5px;color:var(--text-2)}
+footer h2{font-size:15px;color:var(--text)}
+footer p{margin:0 0 8px;max-width:820px}
+
+@media (max-width:900px){
+  .flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .loops{grid-template-columns:1fr}
+  .sizing{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  header.top .wrap{padding-top:8px;padding-bottom:8px;gap:8px}
+  .brand span{display:none}
+  nav.toc{order:3;flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none}
+  nav.toc::-webkit-scrollbar{display:none}
+  nav.toc a{white-space:nowrap}
+  main.wrap{padding-top:14px}
+  h1{font-size:22px;margin-bottom:8px}
+  .memo{padding:14px}
+  .memo-cols,.two,.h-grid{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .legend{margin-left:0}
+  .detail dl{grid-template-columns:1fr}
+  .detail dt{margin-top:4px}
+  /* reflow tables into labelled cards */
+  table.reflow thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  table.reflow caption{display:block;width:100%}
+  table.reflow,table.reflow tbody,table.reflow tr,table.reflow th,table.reflow td{display:block;width:100%}
+  table.reflow tr{border:1px solid var(--line);border-radius:4px;margin:0 0 10px;padding:4px 0;background:var(--surface)}
+  table.reflow tbody th{border-bottom:1px solid var(--line);padding:8px 12px;font-size:14px}
+  table.reflow td{border:0;padding:5px 12px;text-align:left}
+  table.reflow td::before{content:attr(data-label);display:block;font-size:11.5px;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:.04em}
+  table.reflow td.n{white-space:normal}
+}
+@media print{
+  :root:root:root{
+    --bg:#fff; --surface:#fff; --surface-2:#eef0f2; --text:#000; --text-2:#222; --muted:#333;
+    --line:#999; --line-strong:#666; --accent:#1f3a5f; --accent-ink:#1d4f8f; --accent-soft:#e6edf6;
+    --good:#1b6a37; --good-soft:#fff; --warn:#7f5200; --warn-soft:#fff; --bad:#9f2328; --bad-soft:#fff; color-scheme:light;
+  }
+  header.top,nav,.no-print,#factbase,#hypotheses,#agent,#handover,footer{display:none!important}
+  body{background:#fff;color:#000;font-size:9pt;line-height:1.4}
+  .memo ol.moves{font-size:9.5pt;margin-bottom:8px}
+  .scale{font-size:8.5pt;margin:8px 0}
+  .tag{font-size:6.5pt;padding:0 4px}
+  .memo-meta{font-size:8.5pt;margin-bottom:8px}
+  .tile,.memo-cols>div{break-inside:avoid}
+  main.wrap{padding:0}
+  section{margin:0}
+  h1{font-size:16pt;margin:0 0 6px}
+  .eyebrow{display:none}
+  .answer{font-size:11pt}
+  .why,.decision{margin-bottom:8px}
+  .tiles{grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+  .tile{padding:8px}
+  .tile .num{font-size:18pt}
+  .tile .lbl,.tile .base,.memo li{font-size:8.5pt}
+  .memo-cols{grid-template-columns:1fr 1fr;gap:12px}
+  .memo{border:1px solid #999;border-top:4px solid #1f3a5f;padding:12px}
+  .tile{background:#fff}
+  @page{size:A4;margin:12mm}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#memo">Skip to the memo</a>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Work sample <span>· decision memo and fact base · fictional case</span></div>
+    <nav class="toc" aria-label="Sections">
+      <a href="#memo">Memo</a><a href="#factbase">Fact base</a><a href="#hypotheses">Hypotheses</a><a href="#agent">Agent vs person</a><a href="#handover">Handover</a>
+    </nav>
+    <div class="hdr-btns"><button type="button" class="btn" id="printBtn">Print memo</button><button type="button" class="btn" id="themeBtn" aria-pressed="false">Dark theme</button></div>
+  </div>
+</header>
+
+<main class="wrap">
+<!-- ================= 1. MEMO ================= -->
+<section id="memo" aria-labelledby="memo-h">
+  <p class="eyebrow">Steerco pre-read · one page</p>
+  <h1 id="memo-h">Supplier invoice exceptions: fix one ERP setting now, then pilot an agent on control and cash</h1>
+  <p class="memo-meta">Kestrow Grocers Ltd (fictional) · Finance transformation steerco, <span data-date="2026-11-26"></span> · Draft v0.3, <span data-date="2026-11-18"></span>, for Transformation Strategist review</p>
+  <article class="memo">
+    <p class="decision"><b>Decision:</b> approve a six-week agent pilot on the daily queue of price, quantity and missing-receipt exceptions for the top 40 ambient suppliers (<span data-k="cohortPct"></span> of invoice volume).</p>
+    <p class="answer">Recommendation: yes, in two moves.</p>
+    <ol class="moves">
+      <li><b>Now, with no pilot:</b> set the ERP match tolerance to the written procedure (2% and £25 a line; the ERP is at 0%). That removes about <span data-k="tolPct"></span> of exceptions: <span data-k="tolExcN"></span> a year and <span data-k="hTolK"></span> clerk hours.</li>
+      <li><b>Then pilot the agent on what is left, judged on control and cash:</b> no price above tolerance is paid without a buyer's decision on record. Released clerk time is a by-product, not the case.</li>
+    </ol>
+    <p class="why"><b>Why.</b> <span data-k="excRatePct"></span> of invoices fail auto-match and take <span data-k="excHoursShare"></span> of invoice-handling hours; keying takes the other <span data-k="keyShare"></span>. In the sample, <span data-k="unconfN"></span> of the <span data-k="outTolN"></span> price exceptions outside tolerance (<span data-k="unconfOutPct"></span>) were paid at the supplier's price with no buyer approval on record. The £ figure is an upper bound until K1 clears.</p>
+
+    <ul class="tiles" aria-label="The three numbers that matter">
+      <li class="tile">
+        <p class="kind">Cash · exposure</p>
+        <p class="num" data-k="leakM"></p>
+        <p class="lbl">a year paid above PO price with no buyer approval on record</p>
+        <p class="base">Range <span data-k="leakRange"></span>. <span data-k="priceExcN"></span> price exceptions a year × <span data-k="unconfPct"></span> (<span data-k="unconfN"></span> of <span data-k="priceN"></span>) × £<span data-k="overcharge"></span> mean. Upper bound: some will prove correctly priced or credited later (K1). <span class="tag t-samp">Sample n=<span data-k="priceN"></span></span></p>
+      </li>
+      <li class="tile">
+        <p class="kind">Cost · capacity</p>
+        <p class="num" data-k="hoursK"></p>
+        <p class="lbl">clerk hours a year on exceptions (<span data-k="fte"></span> FTE at <span data-k="prodH"></span> hours)</p>
+        <p class="base">Range <span data-k="hoursRange"></span>. Releasable: <span data-k="hTolK"></span> by the tolerance fix, <span data-k="hAgentK"></span> by the agent on rule cases across all classes, and up to <span data-k="hPackK"></span> more if evidence packs save the assumed <span data-k="packPct"></span>. Capacity, not cash, unless a role is not backfilled. <span class="tag t-samp">Timed n=60</span> <span class="tag t-assm">Packs: assumption</span></p>
+      </li>
+      <li class="tile">
+        <p class="kind">Cycle time · service</p>
+        <p class="num"><span data-k="medExc"></span> days</p>
+        <p class="lbl">median to clear an exception invoice, against <span data-k="medClean"></span> for a clean one</p>
+        <p class="base">Interquartile range 11 to 31. Price exceptions wait a median <span data-k="medBuyer"></span> days for a buyer's reply. <span data-k="latePct"></span> of exception invoices are paid after terms; cost not sized (Q2). <span class="tag t-meas">ERP extract</span></p>
+      </li>
+    </ul>
+    <p class="scale">These are whole-estate, annual figures. The pilot covers <span data-k="cohortPct"></span> of volume for six weeks, about <span data-k="pilotExc"></span> exceptions after the tolerance fix. It is sized to prove three things before any scale decision: no unapproved override gets through, buyers decide faster with the evidence attached, and rule cases close without reversal. Commercial terms are outside this memo.</p>
+
+    <div class="memo-cols">
+      <div>
+        <h2 class="colh">What would change the recommendation</h2>
+        <ol>
+          <li><b>K1, cash.</b> If more than half the £ value of the <span data-k="unconfN"></span> unapproved overrides proves correctly priced (an agreed cost change not loaded to the PO) or was credited later, exposure falls below <span data-k="leakHalfM"></span> and the case rests on control, capacity and cycle time. <i>Source:</i> buyer price files, supplier statements. <i>By</i> <span data-date="2026-11-24"></span>.</li>
+          <li><b>K2, technical.</b> If the ERP cannot take match-status write-back through an approved interface, scope drops to evidence packs only. <i>Source:</i> engineer's interface review. <i>By</i> <span data-date="2026-11-20"></span>.</li>
+          <li><b>K3, accuracy.</b> If in shadow mode (weeks 1 and 2) the agent matches the AP lead's ruling on fewer than 95% of rule cases, it does not go live. <i>Source:</i> shadow log.</li>
+          <li><b>K4, volume.</b> If fewer than 35% of in-scope exceptions in the cohort are rule cases (the sample implies <span data-k="postFixRulePct"></span>), stop at week 3. <i>Source:</i> agent log.</li>
+        </ol>
+      </div>
+      <div>
+        <h2 class="colh">Asks of the steerco</h2>
+        <ol>
+          <li>Instruct IT to set the ERP tolerance to procedure v3.2 before go-live, once the reason for the 0% setting is confirmed (Q1).</li>
+          <li>Approve the pilot scope: top 40 ambient suppliers, three exception classes, six weeks.</li>
+          <li>Name one buying-team owner and agree a two-working-day reply on price queries for the cohort.</li>
+          <li>Approve read access to the AP inbox, supplier portal and ERP, plus match-status write-back if K2 clears.</li>
+          <li>Lock the baseline: the same cohort over the eight weeks before go-live, within-tolerance cases excluded. Success is judged on weeks 3 to 6.</li>
+        </ol>
+      </div>
+    </div>
+    <p class="fictional">Illustrative case: Kestrow Grocers Ltd and every figure are fictional. Sources, ranges and workings are in the fact base (appendix).</p>
+  </article>
+</section>
+
+<!-- ================= 2. FACT BASE ================= -->
+<section id="factbase" aria-labelledby="fb-h">
+  <p class="eyebrow">Fact base</p>
+  <h2 id="fb-h">How the process actually runs, and where value is lost</h2>
+  <p class="sub">Sources: a 12-week ERP extract of <span data-k="extractN"></span> email and portal invoices (annualised to <span data-k="volume"></span>), 400 exceptions classified by hand with the AP lead, 60 exceptions timed over two days, and seven interviews. Each input is tagged <span class="tag t-meas">measured</span> <span class="tag t-samp">sampled</span> or <span class="tag t-assm">assumption</span>.</p>
+
+  <h3 id="map-h">As-is process map</h3>
+  <div class="panel" role="group" aria-labelledby="map-h">
+    <div class="map-ctrls">
+      <button type="button" class="btn" id="loopBtn" aria-pressed="true" aria-controls="loopList">Exception loops shown</button>
+      <span class="small">Select a step to see its system, owner, volume and time.</span>
+      <span class="legend" aria-hidden="true"><span><i class="lane-man"></i>Manual step</span><span><i class="lane-auto"></i>System step</span><span><i class="lane-loop"></i>Exception loop</span></span>
+    </div>
+    <ol class="flow" id="flow" aria-label="Main path, steps 1 to 7"></ol>
+    <ul class="loops" id="loopList" aria-label="Exception loops from step 5"></ul>
+    <div class="detail" id="detail" aria-live="polite"></div>
+  </div>
+
+  <h3 id="sz-h">Value at stake and sensitivity</h3>
+  <div class="sizing">
+    <div class="panel no-print" role="group" aria-labelledby="sz-h">
+      <div id="flagbar" class="flagbar base" role="status"></div>
+      <div id="ctrls"></div>
+      <button type="button" class="btn" id="resetBtn">Reset to base case</button>
+    </div>
+    <div>
+      <div class="scroll" tabindex="0" role="region" aria-labelledby="cap1">
+        <table class="reflow" id="leakTable">
+          <caption id="cap1">Value at stake by lever</caption>
+          <thead><tr><th scope="col">Lever</th><th scope="col">What is lost</th><th scope="col">Basis</th><th scope="col" class="n">Scenario</th><th scope="col" class="n">Range (low to high)</th><th scope="col">Evidence</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="outs" id="outs"></div>
+      <p class="small" style="margin-top:10px">Capacity and cash are never added into one £ figure: released clerk hours become cash only if a role is not backfilled. Ranges are the extremes across every combination of the low and high inputs, so they are wide by construction.</p>
+      <details class="panel" style="margin-top:12px">
+        <summary><b>Model checks</b> <span id="checkSum"></span></summary>
+        <ul class="checks" id="checks"></ul>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. HYPOTHESES ================= -->
+<section id="hypotheses" aria-labelledby="hy-h">
+  <p class="eyebrow">Hypothesis log</p>
+  <h2 id="hy-h">What we thought, what the evidence said, what changed</h2>
+  <p class="sub">Each kill criterion was written before the test was run. Two of the three hypotheses did not survive as first written.</p>
+  <div class="hyp" id="hyp"></div>
+</section>
+
+<!-- ================= 4. AGENT VS PERSON ================= -->
+<section id="agent" aria-labelledby="ag-h">
+  <p class="eyebrow">Design of the pilot</p>
+  <h2 id="ag-h">Where an agent should act and where a person decides</h2>
+  <p class="sub">The agent acts only inside rules already written in AP procedure v3.2. Anything that needs judgement goes to a named role with the evidence attached. Every action is logged.</p>
+  <div class="scroll" tabindex="0" role="region" aria-labelledby="cap2">
+    <table class="reflow" id="agentTable">
+      <caption id="cap2">Split of each step: agent rules, human exceptions, audit log</caption>
+      <thead><tr><th scope="col">Step</th><th scope="col">Agent executes (rule)</th><th scope="col">Routed to a person (with evidence)</th><th scope="col">Logged for audit</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <h3>The one process to start with, and how the pilot is judged</h3>
+  <div class="pilot">
+    <div class="panel"><h3>Scope</h3><p>The daily queue of price-variance, short-quantity and missing-receipt exceptions for the top 40 ambient suppliers.</p><p class="small">About <span data-k="pilotExc"></span> in-scope exceptions across six weeks (<span data-k="cohortPct"></span> of volume × <span data-k="excRatePct"></span> exception rate × <span data-k="inScopeShare"></span> in the three classes after the tolerance fix × 6/52). <span class="tag t-assm">Assumption</span> the cohort matches the estate-wide rate and mix; A6 re-measures it. Excluded: new suppliers, bank-detail changes, duplicates and missing PO references.</p></div>
+    <div class="panel"><h3>Primary metric: control</h3><p>Share of outside-tolerance price invoices paid with a buyer's decision on record.</p><p class="small">Target 100%, with zero breaches. Baseline <span data-k="approvedOutPct"></span> in the sample (<span data-k="approvedOutN"></span> of <span data-k="outTolN"></span>).</p></div>
+    <div class="panel"><h3>Cash measure</h3><p>£ rejected or credited after a buyer's decision, by week.</p><p class="small">No target: this is the measured test of the <span data-k="leakM"></span> estimate. Baseline: not tracked today.</p></div>
+    <div class="panel"><h3>Cycle time</h3><p>Median days to clear an in-scope exception, on exceptions raised in weeks 3 and 4 so each has time to close.</p><p class="small">Baseline <span data-k="medExc"></span> days estate-wide, re-measured on the cohort (A6). Proposed target ≤ 12 days, for the steerco to agree; it depends on the two-day buyer reply.</p></div>
+    <div class="panel"><h3>Balancing measure</h3><p>Share of in-scope exception invoices paid after supplier terms must not rise.</p><p class="small">Baseline <span data-k="latePct"></span> estate-wide, re-measured on the cohort. Holding an invoice for a buyer must not turn into paying the supplier late.</p></div>
+    <div class="panel"><h3>Volume gate</h3><p>Share of in-scope exceptions the agent closes within the rules, with no reversal found in a 10% audit sample.</p><p class="small">Expect ≥ 45% in weeks 3 to 6; the sample implies <span data-k="postFixRulePct"></span> after the tolerance fix (<span data-k="inScopeRulePct"></span> before it). Stop below 35% (K4).</p></div>
+  </div>
+</section>
+
+<!-- ================= 5. HANDOVER ================= -->
+<section id="handover" aria-labelledby="ho-h">
+  <p class="eyebrow">Handover</p>
+  <h2 id="ho-h">Open questions, evidence trail and next actions</h2>
+  <p class="sub">Enough for the Transformation Strategist or the engineer to pick this up without a call.</p>
+  <div class="scroll" tabindex="0" role="region" aria-labelledby="cap3">
+    <table class="reflow" id="actTable">
+      <caption id="cap3">Next actions</caption>
+      <thead><tr><th scope="col">#</th><th scope="col">Action</th><th scope="col">Owner</th><th scope="col">Due</th><th scope="col">Unblocks</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="two" style="margin-top:16px">
+    <div class="scroll" tabindex="0" role="region" aria-labelledby="cap4">
+      <table class="reflow" id="qTable">
+        <caption id="cap4">Open questions</caption>
+        <thead><tr><th scope="col">#</th><th scope="col">Question</th><th scope="col">Why it matters</th><th scope="col">Ask</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="scroll" tabindex="0" role="region" aria-labelledby="cap5">
+      <table class="reflow" id="eTable">
+        <caption id="cap5">Evidence trail</caption>
+        <thead><tr><th scope="col">#</th><th scope="col">Source</th><th scope="col">Supports</th><th scope="col">Caveat</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <p class="roles">TS: Transformation Strategist. JTS: Junior Transformation Strategist (author). FDE: forward-deployed engineer.</p>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="small"><b>Work sample. Fictional company and data.</b> Kestrow Grocers Ltd, its suppliers and every figure here are invented for illustration.</p>
+    <div class="author">
+      <h2>About the author</h2>
+      <p>Faizaan Saeed. On a 15-day contract for a satellite and RF manufacturer, he mapped a stock process run on spreadsheets and email, wrote a signed scope, and delivered a Power Platform system with automated workflows, an audit trail and a live dashboard: 56 versioned releases, signed off, and handed over with user, admin and technical guides.</p>
+      <p>He produced a clause-by-clause conformance review of the client's contract and a deviation register. He uses Claude and Claude Code daily, with every output checked against the source.</p>
+      <p>Portfolio: <a href="https://saeedfzn.github.io/">saeedfzn.github.io</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- Sample facts (fixed counts, fictional) ---------- */
+  var SAMPLE = {
+    n: 400,
+    classes: [ // count in sample, of which rule-resolvable under AP procedure v3.2
+      { id: 'price', name: 'Price variance', n: 164, rule: 72, inScope: true },
+      { id: 'qty', name: 'Short quantity / partial delivery', n: 108, rule: 70, inScope: true },
+      { id: 'grn', name: 'Goods receipt missing or late', n: 72, rule: 68, inScope: true },
+      { id: 'po', name: 'Missing PO reference', n: 20, rule: 14, inScope: false },
+      { id: 'other', name: 'Duplicate / other', n: 36, rule: 8, inScope: false }
+    ],
+    unconf: 49,         // outside-tolerance price exceptions paid at invoice price with no recorded buyer approval
+    noReason: 11,       // exceptions closed with no reason recorded
+    extractN: 41540,    // invoices in 12-week extract
+    extractWeeks: 12
+  };
+  var priceN = SAMPLE.classes[0].n;
+  var tolN = SAMPLE.classes[0].rule;   // price exceptions inside the written tolerance: cleared by the ERP setting alone
+  var outTolN = priceN - tolN;         // price exceptions outside tolerance: these need a buyer
+  var ruleTotal = SAMPLE.classes.reduce(function (s, c) { return s + c.rule; }, 0);
+
+  /* ---------- Model inputs: base, low, high, provenance ---------- */
+  var INPUTS = [
+    { k: 'excRate', label: 'Exception rate (share of invoices failing auto-match)', base: 0.38, low: 0.35, high: 0.41, min: 0.20, max: 0.55, step: 0.01, fmt: 'pct', src: 'meas', hint: 'ERP extract, 12 weeks. Weekly range 35% to 41%.', slider: true },
+    { k: 'ruleShare', label: 'Rule-resolvable share of exceptions', base: ruleTotal / SAMPLE.n, low: 0.48, high: 0.65, min: 0.20, max: 0.80, step: 0.01, fmt: 'pct', src: 'samp', hint: '232 of 400 sampled exceptions are settled by a rule already in the procedure. 72 of those need only the tolerance fix.', slider: true },
+    { k: 'unconf', label: 'Price exceptions paid with no buyer approval', base: SAMPLE.unconf / priceN, low: 0.23, high: 0.37, min: 0.05, max: 0.50, step: 0.01, fmt: 'pct1', src: 'samp', hint: '49 of all 164 sampled price exceptions (49 of the 92 outside tolerance). Roughly ±7 points at 95% confidence.', slider: true },
+    { k: 'overcharge', label: 'Mean amount above PO price per unapproved override (£)', base: 46, low: 32, high: 58, min: 10, max: 90, step: 1, fmt: 'gbp', src: 'samp', hint: 'Skewed: the median is £19, and three invoices exceed £300.', slider: true },
+    { k: 'minRule', label: 'Minutes per rule-resolvable exception', base: 10, low: 8, high: 13, min: 4, max: 20, step: 1, fmt: 'min', src: 'samp', hint: 'Timed observation, n=60.', slider: false },
+    { k: 'minJudg', label: 'Minutes per judgement exception', base: 26, low: 20, high: 32, min: 10, max: 45, step: 1, fmt: 'min', src: 'samp', hint: 'Timed observation, n=60, likely a lower bound (E3). Touch time only, not waiting time.', slider: true },
+    { k: 'rate', label: 'Loaded AP clerk cost (£ per hour)', base: 34, low: 30, high: 38, min: 25, max: 45, step: 1, fmt: 'gbp', src: 'assm', hint: 'Salary plus on-costs, from Finance. Not yet confirmed (Q3).', slider: true },
+    { k: 'packSave', label: 'Time an evidence pack saves on judgement cases', base: 0.30, low: 0.10, high: 0.40, min: 0, max: 0.6, step: 0.05, fmt: 'pct', src: 'assm', hint: 'Unproven. The pilot tests it. Set to 0% to see the case without it.', slider: true },
+    { k: 'prevent', label: 'Share of exposure avoided once approval is enforced', base: 0.80, low: 0.60, high: 0.95, min: 0.3, max: 1, step: 0.05, fmt: 'pct', src: 'assm', hint: 'Buyers will approve some of these prices, correctly, with the approval logged.', slider: false }
+  ];
+  var FIXED = {
+    volume: 180000, minClean: 2, prodH: 1650, cohort: 0.44,
+    medClean: 4, medExc: 19, medBuyer: 9, late: 0.23
+  };
+
+  function baseVals(which) { var o = {}; INPUTS.forEach(function (i) { o[i.k] = i[which || 'base']; }); return o; }
+
+  function model(v) {
+    var V = FIXED.volume;
+    var exc = V * v.excRate;
+    var clean = V - exc;
+    var hRule = exc * v.ruleShare * v.minRule / 60;
+    var hJudg = exc * (1 - v.ruleShare) * v.minJudg / 60;
+    var hExc = hRule + hJudg;
+    var hKey = V * FIXED.minClean / 60; // every invoice is keyed, exceptions included
+    var hTol = Math.min(hRule, exc * (tolN / SAMPLE.n) * v.minRule / 60); // released by the tolerance setting, no agent
+    var hRuleAgent = hRule - hTol;
+    var priceExc = exc * (priceN / SAMPLE.n);
+    var leak = priceExc * v.unconf * v.overcharge;
+    var hPack = hJudg * v.packSave;
+    var hRel = hRuleAgent + hPack;
+    return {
+      exc: exc, clean: clean, hRule: hRule, hTol: hTol, hRuleAgent: hRuleAgent, hJudg: hJudg, hExc: hExc, hKey: hKey,
+      keyShare: hKey / (hKey + hExc),
+      costExc: hExc * v.rate, fte: hExc / FIXED.prodH,
+      priceExc: priceExc, leak: leak, leakPrev: leak * v.prevent,
+      hPack: hPack, hRel: hRel, relValue: hRel * v.rate, relFte: hRel / FIXED.prodH,
+      late: exc * FIXED.late
+    };
+  }
+
+  /* ---------- formatting ---------- */
+  var nf0 = new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 });
+  var nf1 = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  function n0(x) { return nf0.format(Math.round(x)); }
+  function round100(x) { return nf0.format(Math.round(x / 100) * 100); }
+  function pct(x) { return Math.round(x * 100) + '%'; }
+  function gbpM(x) { return '£' + (x / 1e6).toFixed(2) + 'm'; }
+  function gbpK(x) { return '£' + nf0.format(Math.round(x / 1000)) + 'k'; }
+  function hk(x) { return round100(x) + ' h'; }
+  function fmtIn(i, x) { return i.fmt === 'pct1' ? nf1.format(x * 100) + '%' : i.fmt === 'pct' ? pct(x) : i.fmt === 'gbp' ? '£' + x : x + ' min'; }
+  function dateLabel(iso) {
+    return new Date(iso + 'T12:00:00Z').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  var SRC = { meas: ['t-meas', 'Measured'], samp: ['t-samp', 'Sampled'], assm: ['t-assm', 'Assumption'], none: ['t-none', 'Not sized'] };
+  function tag(s, extra) { return '<span class="tag ' + SRC[s][0] + '">' + SRC[s][1] + (extra ? ' ' + extra : '') + '</span>'; }
+
+  /* ---------- base-case figures quoted in prose ---------- */
+  var lowV = baseVals('low'), highV = baseVals('high');
+  lowV.ruleShare = INPUTS[1].high; highV.ruleShare = INPUTS[1].low; // more rule-resolvable cases = fewer hours, so flip for the envelope
+  var B = model(baseVals('base')), L = model(lowV), H = model(highV);
+  // brute-force every low/high corner to prove L and H really are the envelope
+  var env = { hMin: Infinity, hMax: -Infinity, lMin: Infinity, lMax: -Infinity };
+  for (var m = 0; m < (1 << INPUTS.length); m++) {
+    var cv = {}; INPUTS.forEach(function (i, j) { cv[i.k] = (m >> j) & 1 ? i.high : i.low; });
+    var cm = model(cv);
+    env.hMin = Math.min(env.hMin, cm.hExc); env.hMax = Math.max(env.hMax, cm.hExc);
+    env.lMin = Math.min(env.lMin, cm.leak); env.lMax = Math.max(env.lMax, cm.leak);
+  }
+  var bv = baseVals('base');
+  var inScope = SAMPLE.classes.filter(function (c) { return c.inScope; });
+  var inScopeN = inScope.reduce(function (s, c) { return s + c.n; }, 0);
+  var inScopeRule = inScope.reduce(function (s, c) { return s + c.rule; }, 0);
+  var postFixN = inScopeN - tolN, postFixRule = inScopeRule - tolN; // in scope once the tolerance fix has removed its cases
+  var pilotExc = FIXED.volume * FIXED.cohort * bv.excRate * (postFixN / SAMPLE.n) * 6 / 52;
+
+  var K = {
+    keyShare: pct(B.keyShare), excRatePct: pct(bv.excRate),
+
+    leakM: gbpM(B.leak), leakRange: gbpM(L.leak) + ' to ' + gbpM(H.leak),
+    priceExcN: round100(B.priceExc), unconfPct: nf1.format(bv.unconf * 100) + '%', overcharge: bv.overcharge,
+    hoursK: n0(Math.round(B.hExc / 100) * 100), fte: nf1.format(B.fte), prodH: n0(FIXED.prodH),
+    hoursRange: hk(L.hExc) + ' to ' + hk(H.hExc),
+    medExc: FIXED.medExc, medClean: FIXED.medClean, medBuyer: FIXED.medBuyer, latePct: pct(FIXED.late),
+    leakHalfM: gbpM(B.leak / 2), inScopeRulePct: pct(inScopeRule / inScopeN), cohortPct: pct(FIXED.cohort),
+    extractN: n0(SAMPLE.extractN), volume: n0(FIXED.volume), pilotExc: round100(pilotExc), inScopeShare: pct(postFixN / SAMPLE.n), hPackK: round100(B.hPack), packPct: pct(bv.packSave),
+    priceN: priceN, unconfN: SAMPLE.unconf, outTolN: outTolN, unconfOutPct: pct(SAMPLE.unconf / outTolN), approvedOutN: outTolN - SAMPLE.unconf, approvedOutPct: pct(1 - SAMPLE.unconf / outTolN), excHoursShare: pct(1 - B.keyShare),
+    tolPct: pct(tolN / SAMPLE.n), tolExcN: round100(B.exc * tolN / SAMPLE.n), hTolK: round100(B.hTol), hAgentK: round100(B.hRuleAgent), postFixRulePct: pct(postFixRule / postFixN)
+  };
+  document.querySelectorAll('[data-k]').forEach(function (el) {
+    var k = el.getAttribute('data-k');
+    if (!(k in K)) { console.warn('missing key', k); el.textContent = '[?]'; return; }
+    el.textContent = K[k];
+  });
+  document.querySelectorAll('[data-date]').forEach(function (el) { el.textContent = dateLabel(el.getAttribute('data-date')); });
+
+  /* ---------- theme ---------- */
+  var themeBtn = document.getElementById('themeBtn');
+  function isDark() {
+    var t = document.documentElement.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function syncTheme() { var d = isDark(); themeBtn.setAttribute('aria-pressed', String(d)); themeBtn.textContent = d ? 'Light theme' : 'Dark theme'; }
+  themeBtn.addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('pim-theme', next); } catch (e) {}
+    syncTheme();
+  });
+  syncTheme();
+  document.getElementById('printBtn').addEventListener('click', function () { window.print(); });
+
+  /* ---------- process map ---------- */
+  var STEPS = [
+    { id: 's1', t: 'Invoice arrives', s: 'AP inbox 71% · portal 29%', auto: false, sys: 'Shared AP mailbox (PDF attachments); supplier portal', owner: 'AP clerk (inbox triage)', vol: n0(FIXED.volume) + ' invoices a year', time: 'Under 1 min to file', pain: 'About 6% arrive twice, once by email and once via the portal (E6). EDI invoices load directly and are outside this extract.' },
+    { id: 's2', t: 'Key header and index in ERP', s: FIXED.minClean + ' min each', auto: false, sys: 'ERP AP module', owner: 'AP clerk', vol: 'All email and portal invoices', time: FIXED.minClean + ' min (timed)', pain: pct(B.keyShare) + ' of invoice-handling hours. The cost does not sit here, which is why H1 was rejected.' },
+    { id: 's3', t: 'Three-way auto-match', s: pct(1 - bv.excRate) + ' pass first time', auto: true, sys: 'ERP match engine (PO, goods receipt, invoice)', owner: 'System', vol: n0(B.clean) + ' pass, ' + n0(B.exc) + ' fail', time: 'Overnight batch', pain: 'ERP tolerance is 0%; procedure v3.2 allows 2% and £25 a line. ' + tolN + ' of 400 sampled exceptions (' + pct(tolN / SAMPLE.n) + ') exist only because of that gap (Q1).', flag: pct(bv.excRate) + ' fail' },
+    { id: 's4', t: 'Log in exceptions sheet', s: 'Shared spreadsheet', auto: false, sys: 'Exceptions spreadsheet (one tab per clerk)', owner: 'AP clerk', vol: n0(B.exc) + ' a year', time: 'Included in handling time', pain: 'No single queue: three versions of the sheet were in use during week 2 of the extract.' },
+    { id: 's5', t: 'Investigate and chase', s: 'Three loops (below)', auto: false, sys: 'Email, phone, portal, ERP enquiry', owner: 'AP clerk, then buyer, DC or supplier', vol: n0(B.exc) + ' a year', time: FIXED.medExc + ' days median elapsed. Price exceptions wait a median ' + FIXED.medBuyer + ' days for a buyer', pain: 'Most of the clerk time and all of the cash exposure sit here.', flag: FIXED.medExc + ' days' },
+    { id: 's6', t: 'Override or hold in ERP', s: 'Reason in free text', auto: false, sys: 'ERP plus the spreadsheet, updated by hand', owner: 'AP clerk (senior clerk above £5k)', vol: n0(B.exc) + ' a year', time: 'Included in handling time', pain: SAMPLE.noReason + ' of 400 sampled exceptions were closed with no reason recorded. ' + SAMPLE.unconf + ' of the ' + outTolN + ' price exceptions outside tolerance were paid with no buyer approval on record.', flag: 'Control gap' },
+    { id: 's7', t: 'Release to payment run', s: 'Weekly, approved', auto: false, sys: 'ERP payment run', owner: 'Finance controller', vol: 'All matched invoices', time: 'Weekly cycle', pain: pct(FIXED.late) + ' of exception invoices miss supplier terms. Out of scope for the pilot: payment approval stays with a person.' }
+  ];
+  var LOOPS = [
+    { id: 'l1', t: 'A · Receipt missing: chase the DC', s: SAMPLE.classes[2].n + ' of 400 · ' + SAMPLE.classes[2].rule + ' resolve once the receipt posts', sys: 'Email to the DC inventory controller; ERP goods-receipt enquiry', owner: 'AP clerk → DC controller', vol: pct(SAMPLE.classes[2].n / SAMPLE.n) + ' of exceptions', time: 'Typically 3 to 5 days', pain: 'Most resolve on their own once the receipt posts. A daily re-check closes them with nobody chasing.' },
+    { id: 'l2', t: 'B · Price variance: ask the buyer', s: priceN + ' of 400 · ' + tolN + ' within written tolerance', sys: 'Email to the category buyer; promo deal sheets in a spreadsheet', owner: 'AP clerk → buyer', vol: pct(priceN / SAMPLE.n) + ' of exceptions', time: FIXED.medBuyer + ' days median waiting for a reply', pain: 'When a buyer does not reply, the clerk pays the invoice price so the supplier is paid to terms. That is the source of the ' + gbpM(B.leak) + ' exposure.' },
+    { id: 'l3', t: 'C · Short quantity: request a credit', s: SAMPLE.classes[1].n + ' of 400 · ' + SAMPLE.classes[1].rule + ' match a second receipt', sys: 'Supplier portal dispute form', owner: 'AP clerk → supplier', vol: pct(SAMPLE.classes[1].n / SAMPLE.n) + ' of exceptions', time: '5 to 12 days for the credit note', pain: 'Many are partial deliveries that a second receipt already covers. They need matching across receipts, not a credit.' }
+  ];
+  var ALL = STEPS.concat(LOOPS);
+  var flow = document.getElementById('flow'), loopList = document.getElementById('loopList'), detail = document.getElementById('detail');
+  STEPS.forEach(function (s, i) {
+    var li = document.createElement('li');
+    li.innerHTML = '<button type="button" class="step' + (s.auto ? ' auto' : '') + '" id="b-' + s.id + '" aria-expanded="false" aria-controls="detail">' +
+      '<span class="sn">Step ' + (i + 1) + (s.auto ? ' · system' : '') + '</span><span class="st">' + esc(s.t) + '</span><span class="ss">' + esc(s.s) + '</span>' +
+      (s.flag ? '<span class="flag">' + esc(s.flag) + '</span>' : '') + '</button>';
+    flow.appendChild(li);
+  });
+  LOOPS.forEach(function (s) {
+    var li = document.createElement('li');
+    li.innerHTML = '<button type="button" class="loop" id="b-' + s.id + '" aria-expanded="false" aria-controls="detail"><span class="st">' + esc(s.t) + '</span><span class="ss">' + esc(s.s) + '</span></button>';
+    loopList.appendChild(li);
+  });
+  function show(id) {
+    var s = ALL.filter(function (x) { return x.id === id; })[0];
+    ALL.forEach(function (x) { document.getElementById('b-' + x.id).setAttribute('aria-expanded', String(x.id === id)); });
+    detail.innerHTML = '<h3>' + esc(s.t) + '</h3><dl><dt>System</dt><dd>' + esc(s.sys) + '</dd><dt>Owner</dt><dd>' + esc(s.owner) + '</dd><dt>Volume</dt><dd>' + esc(s.vol) + '</dd><dt>Time</dt><dd>' + esc(s.time) + '</dd><dt>Finding</dt><dd>' + esc(s.pain) + '</dd></dl>';
+  }
+  ALL.forEach(function (s) { document.getElementById('b-' + s.id).addEventListener('click', function () { show(s.id); }); });
+  show('s5');
+  var loopBtn = document.getElementById('loopBtn');
+  loopBtn.addEventListener('click', function () {
+    var on = loopBtn.getAttribute('aria-pressed') !== 'true';
+    loopBtn.setAttribute('aria-pressed', String(on));
+    loopBtn.textContent = on ? 'Exception loops shown' : 'Exception loops hidden';
+    loopList.hidden = !on;
+  });
+
+  /* ---------- sliders ---------- */
+  var ctrls = document.getElementById('ctrls'), cur = baseVals('base');
+  INPUTS.filter(function (i) { return i.slider; }).forEach(function (i) {
+    var d = document.createElement('div'); d.className = 'ctrl';
+    d.innerHTML = '<label for="in-' + i.k + '"><span>' + esc(i.label) + '</span><output id="out-' + i.k + '" for="in-' + i.k + '"></output></label>' +
+      '<input type="range" id="in-' + i.k + '" min="' + i.min + '" max="' + i.max + '" step="' + i.step + '" value="' + i.base + '" aria-describedby="h-' + i.k + '">' +
+      '<p class="hint" id="h-' + i.k + '">' + tag(i.src) + ' ' + esc(i.hint) + ' Base ' + fmtIn(i, i.base) + '.</p>';
+    ctrls.appendChild(d);
+    var inp = d.querySelector('input');
+    inp.addEventListener('input', function () { var v = parseFloat(inp.value); cur[i.k] = Math.abs(v - i.base) < i.step / 2 ? i.base : v; render(); });
+  });
+  document.getElementById('resetBtn').addEventListener('click', function () {
+    cur = baseVals('base');
+    INPUTS.forEach(function (i) { var el = document.getElementById('in-' + i.k); if (el) el.value = i.base; });
+    render();
+  });
+
+  function isBase() { return INPUTS.every(function (i) { return Math.abs(cur[i.k] - i.base) < i.step / 2; }); }
+
+  function render() {
+    INPUTS.forEach(function (i) { var o = document.getElementById('out-' + i.k); if (o) o.textContent = fmtIn(i, cur[i.k]); });
+    var M = model(cur), base = isBase();
+    var fb = document.getElementById('flagbar');
+    fb.className = 'flagbar ' + (base ? 'base' : 'diff');
+    fb.textContent = base ? 'Base case. The memo quotes these figures.'
+      : 'Scenario differs from the base case. The memo quotes the base case.';
+    var rows = [
+      ['Cost', 'Clerk time on exceptions', n0(M.exc) + ' exceptions × weighted ' + nf1.format(M.hExc / M.exc * 60) + ' min × £' + cur.rate + '/h', gbpK(M.costExc) + '<span class="rowsub">' + n0(M.hExc) + ' h · ' + nf1.format(M.fte) + ' FTE</span>', gbpK(L.costExc) + ' to ' + gbpK(H.costExc), tag('samp', 'timed n=60') + ' ' + tag('assm', '£/h')],
+      ['Cash', 'Paid above PO price with no buyer approval (upper bound)', n0(M.priceExc) + ' price exceptions × ' + nf1.format(cur.unconf * 100) + '% × £' + cur.overcharge, gbpK(M.leak), gbpK(L.leak) + ' to ' + gbpK(H.leak), tag('samp', 'n=' + priceN) + ' K1 open'],
+      ['Cycle time', 'Days to clear an exception', 'Median elapsed, ERP timestamps. Medians are not averaged across classes.', FIXED.medExc + ' days<span class="rowsub">vs ' + FIXED.medClean + ' clean · price cases wait ' + FIXED.medBuyer + ' for a buyer</span>', 'IQR 11 to 31 days', tag('meas')],
+      ['Service', 'Exception invoices paid after supplier terms', n0(M.exc) + ' × ' + pct(FIXED.late), n0(M.late) + ' invoices', '£ not sized', tag('none', 'Q2')],
+      ['Control', 'Overrides and closures without a trail', SAMPLE.unconf + ' of ' + outTolN + ' outside-tolerance price exceptions paid with no approval; ' + SAMPLE.noReason + ' of 400 closed with no reason', pct(SAMPLE.unconf / outTolN) + '<span class="rowsub">' + pct(SAMPLE.noReason / SAMPLE.n) + ' with no reason</span>', 'n/a', tag('samp', 'n=400')]
+    ];
+    var hdr = ['Lever', 'What is lost', 'Basis', 'Scenario', 'Range (low to high)', 'Evidence'];
+    document.querySelector('#leakTable tbody').innerHTML = rows.map(function (r) {
+      return '<tr><th scope="row">' + r[0] + '</th>' + r.slice(1).map(function (c, j) {
+        return '<td data-label="' + hdr[j + 1] + '"' + (j === 2 || j === 3 ? ' class="n"' : '') + '>' + c + '</td>';
+      }).join('') + '</tr>';
+    }).join('');
+    document.getElementById('outs').innerHTML =
+      '<div class="out"><p class="k">Released by the tolerance fix, no agent</p><p class="v" id="o-tol">' + n0(M.hTol) + ' h</p><p class="d">' + pct(tolN / SAMPLE.n) + ' of exceptions (' + n0(M.exc * tolN / SAMPLE.n) + ' a year) at ' + cur.minRule + ' min each.</p></div>' +
+      '<div class="out"><p class="k">Capacity the agent could release at full scale</p><p class="v" id="o-rel">' + n0(M.hRel) + ' h</p><p class="d">' + nf1.format(M.relFte) + ' FTE · rule cases ' + n0(M.hRuleAgent) + ' h + evidence packs ' + n0(M.hPack) + ' h. Worth ' + gbpK(M.relValue) + ' only if not backfilled.</p></div>' +
+      '<div class="out"><p class="k">Cash exposure avoided at full scale</p><p class="v" id="o-prev">' + gbpK(M.leakPrev) + '</p><p class="d">' + pct(cur.prevent) + ' of ' + gbpK(M.leak) + ' (assumption, and subject to K1). Never added to capacity.</p></div>' +
+      '<div class="out"><p class="k">Keying share of invoice-handling hours</p><p class="v" id="o-key">' + pct(M.keyShare) + '</p><p class="d">' + n0(M.hKey) + ' h keying vs ' + n0(M.hExc) + ' h on exceptions.</p></div>';
+  }
+  render();
+
+  /* ---------- maths checks (run on load) ---------- */
+  var sumN = SAMPLE.classes.reduce(function (s, c) { return s + c.n; }, 0);
+  var allRuleLE = SAMPLE.classes.every(function (c) { return c.rule <= c.n; });
+  var hoursRecon = Math.abs(B.hRule + B.hJudg - B.hExc) < 1e-6;
+  var annual = SAMPLE.extractN * 52 / SAMPLE.extractWeeks;
+  var monoOK = L.leak <= B.leak && B.leak <= H.leak && L.hExc <= B.hExc && B.hExc <= H.hExc;
+  var CHECKS = [
+    ['Sample classes sum to 400', sumN === SAMPLE.n, sumN + ' = ' + SAMPLE.n],
+    ['Rule-resolvable counts sum to 232 and none exceeds its class', ruleTotal === 232 && allRuleLE, ruleTotal + ' of ' + SAMPLE.n + ' = ' + pct(ruleTotal / SAMPLE.n)],
+    ['Unapproved overrides are a subset of outside-tolerance price exceptions', SAMPLE.unconf <= outTolN && outTolN === priceN - tolN, SAMPLE.unconf + ' ≤ ' + outTolN + ' = ' + priceN + ' − ' + tolN],
+    ['Keying is under a third of handling hours (H1 kill criterion)', B.keyShare < 1 / 3, pct(B.keyShare)],
+    ['Rule hours = tolerance-fix hours + agent hours', Math.abs(B.hTol + B.hRuleAgent - B.hRule) < 1e-6, n0(B.hTol) + ' + ' + n0(B.hRuleAgent) + ' = ' + n0(B.hRule)],
+    ['Post-fix rule share clears the 45% target and the 35% K4 stop', postFixRule / postFixN > 0.45, postFixRule + ' of ' + postFixN + ' = ' + pct(postFixRule / postFixN)],
+    ['Exception hours = rule hours + judgement hours', hoursRecon, n0(B.hRule) + ' + ' + n0(B.hJudg) + ' = ' + n0(B.hExc)],
+    ['Annualised extract is within 0.1% of the stated volume', Math.abs(annual - FIXED.volume) / FIXED.volume < 0.001, n0(annual) + ' vs ' + n0(FIXED.volume)],
+    ['Ranges equal the true envelope over all ' + (1 << INPUTS.length) + ' low/high combinations', Math.abs(env.hMin - L.hExc) < 1e-6 && Math.abs(env.hMax - H.hExc) < 1e-6 && Math.abs(env.lMin - L.leak) < 1e-6 && Math.abs(env.lMax - H.leak) < 1e-6, hk(env.hMin) + ' to ' + hk(env.hMax)],
+    ['Low ≤ base ≤ high for cash exposure and hours', monoOK, gbpM(L.leak) + ' ≤ ' + gbpM(B.leak) + ' ≤ ' + gbpM(H.leak)],
+    ['Released capacity ≤ total exception hours', B.hRel <= B.hExc, n0(B.hRel) + ' ≤ ' + n0(B.hExc)],
+    ['Memo hours figure matches the model (to nearest 100)', K.hoursK === n0(Math.round(B.hExc / 100) * 100), K.hoursK + ' h']
+  ];
+  var pass = CHECKS.filter(function (c) { return c[1]; }).length;
+  document.getElementById('checkSum').innerHTML = '<span class="' + (pass === CHECKS.length ? 'ok' : 'fail') + '">' + pass + ' of ' + CHECKS.length + ' pass</span>';
+  document.getElementById('checks').innerHTML = CHECKS.map(function (c) {
+    return '<li><span class="' + (c[1] ? 'ok' : 'fail') + '">' + (c[1] ? 'Pass' : 'Fail') + '</span> ' + esc(c[0]) + ' <span class="small">(' + esc(c[2]) + ')</span></li>';
+  }).join('');
+  window.__PIM = { model: model, baseVals: baseVals, B: B, L: L, H: H, K: K, checksPassed: pass, checksTotal: CHECKS.length };
+
+  /* ---------- hypothesis log ---------- */
+  var HYP = [
+    { id: 'H1', when: 'Set day 1, tested day 4', st: ['st-rej', 'Rejected'], conf: 0,
+      h: 'The cost is in keying invoices. Capture and OCR would fix it.',
+      kill: 'Keying is less than a third of invoice-handling hours.',
+      forE: 'Clerks name "the inbox" as their main pain point (interviews E5).',
+      against: 'Keying takes ' + FIXED.minClean + ' min an invoice: ' + pct(B.keyShare) + ' of handling hours (' + n0(B.hKey) + ' h against ' + n0(B.hExc) + ' h on exceptions). Kill criterion met.',
+      changed: 'Dropped capture. Moved to exceptions.' },
+    { id: 'H2', when: 'Set day 4, tested day 7', st: ['st-rev', 'Revised'], conf: 2,
+      h: 'Exceptions drive the cost, and most of them are rule-resolvable.',
+      kill: 'Fewer than 40% of exceptions are settled by a rule that already exists.',
+      forE: pct(ruleTotal / SAMPLE.n) + ' (' + ruleTotal + ' of 400) are settled by a rule already in procedure v3.2 (E2, E4).',
+      against: 'The rule-resolvable cases are the quick ones (' + bv.minRule + ' min against ' + bv.minJudg + ' min). They are only ' + pct(B.hRule / B.hExc) + ' of exception hours, and ' + tolN + ' of the ' + ruleTotal + ' need no agent, only the tolerance setting.',
+      changed: 'The capacity case shrank and the tolerance fix became move 1. Looked for where the rest of the value sits.' },
+    { id: 'H3', when: 'Set day 7, open', st: ['st-cur', 'Current'], conf: 2,
+      h: 'The value is in control and cash. Prices above tolerance are paid without buyer approval, and price exceptions queue for buyers. The agent should hold those invoices and hand the buyer a ready evidence pack.',
+      kill: 'K1: if more than half the £ value of the unapproved overrides proves correctly priced or was credited later, cash falls to secondary.',
+      forE: SAMPLE.unconf + ' of ' + outTolN + ' outside-tolerance price exceptions were paid with no recorded approval (E2). Price exceptions wait a median ' + FIXED.medBuyer + ' days for a buyer (E1).',
+      against: 'Not yet checked: the PO price may be the stale one (an agreed cost change not loaded), or a credit may have followed. The mean is skewed (median £19), so a few invoices carry the total.',
+      changed: 'The pilot is framed on a guardrail (zero unapproved overrides) and cycle time. Capacity is secondary.' }
+  ];
+  document.getElementById('hyp').innerHTML = HYP.map(function (h) {
+    var dots = '<span class="conf" aria-hidden="true">' + [0, 1, 2].map(function (i) { return '<i class="' + (i < h.conf ? 'on' : '') + '"></i>'; }).join('') + '</span>';
+    var confWord = ['none', 'low', 'medium', 'high'][h.conf];
+    return '<article class="h-card"><div class="h-head"><h3>' + h.id + ' · ' + esc(h.h) + '</h3><span class="tag ' + h.st[0] + '">' + h.st[1] + '</span><span class="small">' + h.when + ' · confidence ' + confWord + dots + '</span></div>' +
+      '<div class="h-grid"><p><b>Kill criterion, written first</b>' + esc(h.kill) + '</p><p><b>Evidence for</b>' + esc(h.forE) + '</p><p><b>Evidence against</b>' + esc(h.against) + '</p><p><b>What changed</b>' + esc(h.changed) + '</p></div></article>';
+  }).join('');
+
+  /* ---------- agent vs person ---------- */
+  var AG = [
+    ['Invoice arrives', 'Read the inbox and portal; extract header and lines; check the supplier is on the master file; hold exact duplicates (same supplier, number and value).', 'New supplier or bank-detail change goes to the AP lead. The agent never acts on these.', 'Source file hash, extracted fields, duplicate check result'],
+    ['Three-way match', 'The ERP applies tolerance once the setting is aligned. The agent re-runs the match when a late or second receipt posts.', 'Nothing, unless a rule fails.', 'Rule ID and version, matched PO and receipt lines'],
+    ['Receipt missing (loop A)', 'Re-check the ERP daily for 5 working days; send one templated chase to the DC; close the exception when the receipt posts.', 'After 5 days, the DC controller gets the PO, delivery note and invoice.', 'Each check and chase, with timestamps'],
+    ['Price variance (loop B)', 'Build an evidence pack: PO price, contract price list, promo deal sheet, last three invoices. Send it to the buyer with accept, reject or request-credit options.', 'The buyer decides; the agent cannot accept a price outside tolerance. No reply in two working days: escalate to the named buying owner. Still open three working days before terms expire: the Finance controller decides whether to pay.', 'Buyer, decision, time, evidence pack version, each escalation'],
+    ['Short quantity (loop C)', 'Raise the credit-note request on the portal when the receipt is lower than the invoice and no second receipt posts within 5 working days.', 'If the supplier contests, an AP clerk handles it, with the portal thread attached.', 'Request ID, supplier response, credit note number'],
+    ['Post and release', 'Write the match status back to the ERP through the approved interface (subject to K2).', 'The payment run stays with the Finance controller, unchanged.', 'ERP write-back ID, before and after status']
+  ];
+  var agH = ['Step', 'Agent executes (rule)', 'Routed to a person (with evidence)', 'Logged for audit'];
+  document.querySelector('#agentTable tbody').innerHTML = AG.map(function (r) {
+    return '<tr><th scope="row">' + esc(r[0]) + '</th>' + r.slice(1).map(function (c, j) { return '<td data-label="' + agH[j + 1] + '">' + esc(c) + '</td>'; }).join('') + '</tr>';
+  }).join('');
+
+  /* ---------- handover ---------- */
+  var ACT = [
+    ['A1', 'Check the ' + SAMPLE.unconf + ' unapproved overrides against buyer price files (was the PO price stale?) and supplier statements (was it credited later?), by £ value', 'JTS with Kestrow AP lead', '2026-11-24', 'K1, the cash number'],
+    ['A2', 'Confirm whether the ERP accepts match-status write-back through an approved interface', 'FDE', '2026-11-20', 'K2, pilot scope'],
+    ['A3', 'Confirm the loaded clerk cost and productive-hours basis', 'Kestrow Finance business partner', '2026-11-20', 'Cost line, Q3'],
+    ['A4', 'Challenge this memo and agree the steerco framing (tolerance fix first, then control)', 'TS', '2026-11-19', 'Steerco pack'],
+    ['A5', 'Draft the buyer evidence-pack template and test it with two buyers', 'JTS', '2026-11-25', 'Loop B design'],
+    ['A6', 'Pull the cohort baseline (top 40 suppliers, last 8 weeks, within-tolerance cases excluded) and lock the measurement window', 'JTS with FDE', '2026-11-25', 'Pilot baseline'],
+    ['A7', 'Find out why ERP tolerance is 0% and who can approve the change', 'JTS with Kestrow AP lead and IT', '2026-11-20', 'Q1, move 1']
+  ];
+  var actH = ['#', 'Action', 'Owner', 'Due', 'Unblocks'];
+  document.querySelector('#actTable tbody').innerHTML = ACT.map(function (r) {
+    return '<tr><th scope="row">' + r[0] + '</th><td data-label="' + actH[1] + '">' + esc(r[1]) + '</td><td data-label="' + actH[2] + '">' + esc(r[2]) + '</td><td data-label="' + actH[3] + '"><time datetime="' + r[3] + '">' + dateLabel(r[3]) + '</time></td><td data-label="' + actH[4] + '">' + esc(r[4]) + '</td></tr>';
+  }).join('');
+  var Q = [
+    ['Q1', 'Why is ERP tolerance set to 0% when procedure v3.2 allows 2% and £25?', 'The setting alone clears ' + pct(tolN / SAMPLE.n) + ' of exceptions with no agent. If the 0% is deliberate (an audit action, say), move 1 needs a sign-off, not a change request.', 'AP lead, IT'],
+    ['Q2', 'Do late payments carry a cost (statutory interest claims, lost settlement discounts, accounts put on stop)?', 'The only lever not sized in £. No baseline exists today.', 'Treasury'],
+    ['Q3', 'Is £34 an hour the right loaded cost, and is 1,650 the right productive-hours figure?', 'Moves the cost line by ±12%. Does not change the recommendation.', 'Finance BP'],
+    ['Q4', 'Will buyers commit to a two-working-day reply on price queries?', 'Cycle time cannot fall without it, and held invoices would be paid late.', 'Buying director (TS to raise)']
+  ];
+  var qH = ['#', 'Question', 'Why it matters', 'Ask'];
+  document.querySelector('#qTable tbody').innerHTML = Q.map(function (r) {
+    return '<tr><th scope="row">' + r[0] + '</th>' + r.slice(1).map(function (c, j) { return '<td data-label="' + qH[j + 1] + '">' + esc(c) + '</td>'; }).join('') + '</tr>';
+  }).join('');
+  var E = [
+    ['E1', 'ERP extract, 12 weeks, ' + n0(SAMPLE.extractN) + ' invoices', 'Volume, exception rate, cycle times, late payment', 'Email and portal invoices only (EDI excluded). Summer weeks only, so Christmas volumes are missing'],
+    ['E2', 'Exception sample, n=400, classified with the AP lead', 'Class mix, rule-resolvable share, unapproved overrides', 'Stratified by clerk, not by supplier'],
+    ['E3', 'Timed observation, n=60, over two days', 'Handling minutes', 'Observer effect is likely; treat as a lower bound'],
+    ['E4', 'AP procedure v3.2', 'Tolerance rules the agent would apply', 'Differs from the ERP configuration (Q1)'],
+    ['E5', 'Seven interviews: AP lead, three clerks, two buyers, DC controller', 'Workarounds, buyer wait, pain points', 'Buyers were interviewed last and briefly'],
+    ['E6', 'Supplier portal dispute export', 'Credit-note timings, double submissions', 'Portal covers 29% of invoices only']
+  ];
+  var eH = ['#', 'Source', 'Supports', 'Caveat'];
+  document.querySelector('#eTable tbody').innerHTML = E.map(function (r) {
+    return '<tr><th scope="row">' + r[0] + '</th>' + r.slice(1).map(function (c, j) { return '<td data-label="' + eH[j + 1] + '">' + esc(c) + '</td>'; }).join('') + '</tr>';
+  }).join('');
+})();
+</script>
+</body>
+</html>
